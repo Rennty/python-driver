@@ -816,6 +816,7 @@ class Tuple(BaseCollectionColumn):
             raise ValueError("Tuple must specify at least one inner type")
         super(Tuple, self).__init__(args, **kwargs)
         self.db_type = 'tuple<{0}>'.format(', '.join(typ.db_type for typ in self.types))
+        self._freeze_db_type()
 
     def validate(self, value):
         val = super(Tuple, self).validate(value)
